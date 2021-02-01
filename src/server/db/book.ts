@@ -4,9 +4,9 @@ let Schema = mongoose.Schema;
 
 let bookSchema = new Schema({
   name: String,
-  modifyTime: Number | String,
+  modifyTime: String,
   description: String,
-  createTime:Number | String,
+  createTime:String,
   thumbnail: String,
 });
 

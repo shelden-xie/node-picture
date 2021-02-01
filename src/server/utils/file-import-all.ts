@@ -3,9 +3,11 @@ import path from "path";
 /**
  * 映射 d 文件夹下的文件为模块
  */
-const fileImport = (d) => {
+
+
+const fileImport = (d:string) => {
   d = d || path.join(__dirname);
-  const tree = {};
+  const tree:any= {};
   // 获得当前文件夹下的所有的文件夹和文件
   let files = [];
   try {

@@ -10,10 +10,10 @@ export const getToken = (payload = {}) => {
 };
 
 // 验证token
-export const verifyToken = (token) => {
+export const verifyToken = (token: string) => {
   return new Promise((resolve, reject) => {
     try {
-      jwt.verify(token.replace(/Bearer /,''), config.token.secret, function (err, decoded) {
+      jwt.verify(token.replace(/Bearer /, ''), config.token.secret, function (err, decoded) {
         err ? resolve(false) : resolve(decoded);
       });
     } catch (e) {
@@ -23,12 +23,12 @@ export const verifyToken = (token) => {
 };
 
 // 异步密码加密
-export const encryptPasswordAsync = (pwd) => {
+export const encryptPasswordAsync = (pwd: string) => {
   return new Promise((resolve, reject) => {
-    bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.genSalt(10, function (err: any, salt: string) {
       //10,密码加密的迭代次数
       err && reject(err);
-      bcrypt.hash(pwd, salt, function (err, hash) {
+      bcrypt.hash(pwd, salt, function (err: any, hash: string) {
         // 把hash值赋值给password变量
         err ? reject(err) : resolve(hash);
       });
@@ -37,9 +37,9 @@ export const encryptPasswordAsync = (pwd) => {
 };
 
 // 异步密码验证
-export const verifyPasswordAsync = (pwd1, pwd2) => {
+export const verifyPasswordAsync = (pwd1: string, pwd2: string) => {
   return new Promise((resolve, reject) => {
-    bcrypt.compare(pwd1, pwd2, function (err, res) {
+    bcrypt.compare(pwd1, pwd2, function (err: any, res: boolean) {
       err ? reject(err) : resolve(res);
     });
   });

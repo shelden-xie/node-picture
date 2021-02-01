@@ -1001,6 +1001,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/co@^4.6.2":
+  version "4.6.2"
+  resolved "https://registry.npm.taobao.org/@types/co/download/@types/co-4.6.2.tgz?cache=0&sync_timestamp=1605053037352&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fco%2Fdownload%2F%40types%2Fco-4.6.2.tgz#027177ea7a3e34adbd55424e8b949fceb80fda32"
+  integrity sha1-AnF36no+NK29VUJOi5SfzrgP2jI=
+
 "@types/connect@*":
   version "3.4.34"
   resolved "https://registry.npm.taobao.org/@types/connect/download/@types/connect-3.4.34.tgz?cache=0&sync_timestamp=1607458722751&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fconnect%2Fdownload%2F%40types%2Fconnect-3.4.34.tgz#170a40223a6d666006d93ca128af2beb1d9b1901"

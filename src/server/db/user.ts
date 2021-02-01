@@ -4,11 +4,11 @@ let Schema = mongoose.Schema;
 
 let bookSchema = new Schema({
   name: String,
-  password:String,
-  createdAt:String | Number,
-  lastLoginAt:String | Number
+  password: String,
+  createdAt: String,
+  lastLoginAt: String
 });
 
 let UserModel = mongoose.model("user", bookSchema);
 
-export default UserModel;4
+export default UserModel;

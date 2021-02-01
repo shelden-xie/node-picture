@@ -12,7 +12,7 @@ import koaBody from "koa-body"; //处理post参数
 import parameter from "koa-parameter"; //参数校验
 import cors from "koa2-cors"; //允许客户端跨域访问
 import compress from "koa-compress"; //开启服务端Gzip压缩功能
-import helmet from "koa-helmet"; //设置Http头保障应用程序安全
+import helmet from "koa-helmet"; //设置Http头保障应用程序安全j
 import verifyTokens from "./middlewares/vetifyUser"; //验证路由token中间件
 import { historyApiFallback } from "koa2-connect-history-api-fallback"; //koa2支持SPA应用程序,加白名单
 //错误处理
@@ -21,8 +21,7 @@ import errorHander from "./middlewares/errorHandler";
 const app = new Koa();
 //获取日志
 const logger = log4js.getLogger("globalError");
-
-// 初始化模板配置
+// 初始化模板配置d
 app.context.render = co.wrap(
   render({
     cache: config.cache,

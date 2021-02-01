@@ -5,11 +5,17 @@ import {
   verifyPasswordAsync,
 } from "../utils/user";
 import { success, fail, getParams } from "../utils/responseHandle";
-import rules from "../utils/typeParams";
 import models from "../models";
 import dayjs from "dayjs";
+import { Context } from 'koa'
 
-const login = async (ctx) => {
+interface userContr {
+  login: any;
+  register: any;
+  userInfo: any;
+}
+
+const login: userContr['login'] = async (ctx: Context) => {
   let params = getParams(ctx);
   let times = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
   let users = await models.userModel.findUser(ctx, { name: params.name });
@@ -27,7 +33,7 @@ const login = async (ctx) => {
   ctx.body = success(0, { token: token }, "登录成功");
 };
 
-const register = async (ctx) => {
+const register: userContr['register'] = async (ctx: Context) => {
   let params = getParams(ctx);
   let times = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
   let users = await models.userModel.findUser(ctx, { name: params.name });
@@ -44,8 +50,8 @@ const register = async (ctx) => {
   ctx.body = success(0, {}, "注册成功");
 };
 
-const userInfo = async (ctx) => {
-  let userInfo = await verifyToken(ctx.headers.authorization);
+const userInfo = async (ctx: Context) => {
+  let userInfo: any = await verifyToken(ctx.headers.authorization);
   let data = await models.userModel.findUser(ctx, { name: userInfo.name });
   ctx.body = success(0, data, "请求成功");
 };
@@ -53,4 +59,4 @@ export default {
   login,
   register,
   userInfo,
-};
+} as userContr;
