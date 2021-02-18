@@ -1,15 +1,19 @@
 const rules = {
+  bookList:{
+    page:{type: 'string', required: false},
+    pageSize:{type: 'string', required: false}
+  },
   bookAdd: {
     name: { type: "string", require: true },
     description: { type: "string", require: false },
   },
   bookModify: {
-    _id: { type: "id", require: true },
+    id: { type: "string", require: true },
     name: { type: "string", require: true },
     description: { type: "string", require: false },
   },
   bookDelete: {
-    _id: { type: "string", require: true },
+    id: { type: "string", require: true },
   },
 };
 

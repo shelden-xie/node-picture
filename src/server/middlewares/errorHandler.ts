@@ -1,8 +1,8 @@
 import { fail } from "../utils/responseHandle";
 import { Context } from 'koa'
 class ErrorHandler {
-  static error(app:any, log:any){
-    app.use(async (ctx:Context, next:any) => {
+  static error(app: any, log: any) {
+    app.use(async (ctx: Context, next: any): Promise<void> => {
       try {
         await next();
       } catch (error) {
@@ -11,7 +11,7 @@ class ErrorHandler {
       }
     });
     // 处理页面的 404
-    app.use(async (ctx:Context, next:any) => {
+    app.use(async (ctx: Context, next: any): Promise<void> => {
       await next();
       if (ctx.status === 404) {
         // 公益 404

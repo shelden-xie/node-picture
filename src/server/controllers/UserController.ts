@@ -9,13 +9,7 @@ import models from "../models";
 import dayjs from "dayjs";
 import { Context } from 'koa'
 
-interface userContr {
-  login: any;
-  register: any;
-  userInfo: any;
-}
-
-const login: userContr['login'] = async (ctx: Context) => {
+const login = async (ctx: Context) => {
   let params = getParams(ctx);
   let times = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
   let users = await models.userModel.findUser(ctx, { name: params.name });
@@ -28,12 +22,13 @@ const login: userContr['login'] = async (ctx: Context) => {
   }
   let token = await getToken({ name: params.name });
   await models.userModel.updateUser(ctx, {
+    ...params,
     lastLoginAt: times,
   }); //更新登录时间
   ctx.body = success(0, { token: token }, "登录成功");
 };
 
-const register: userContr['register'] = async (ctx: Context) => {
+const register = async (ctx: Context) => {
   let params = getParams(ctx);
   let times = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
   let users = await models.userModel.findUser(ctx, { name: params.name });
@@ -59,4 +54,4 @@ export default {
   login,
   register,
   userInfo,
-} as userContr;
+};

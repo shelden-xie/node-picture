@@ -38,7 +38,7 @@ app.use(parameter(app)); //开启全局参数校验
 app.use(cors()); //开启跨域
 app.use(compress({ threshold: 2048 })); //当数据超过2kb的时候进行压缩
 app.use(helmet.contentSecurityPolicy()); //默认使用多种策略，可以具体某一项配置
-log4js.configure(log4json);
+log4js.configure(log4json);//初始化log4
 
 //初始化连接数据库
 DB.connect();
