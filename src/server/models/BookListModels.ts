@@ -1,16 +1,6 @@
 import { Context } from 'koa'
-// 参数
-interface paramsConf {
-  id: string,
-  page?: number | undefined,
-  pageSize?: number | undefined,
-  name?: string | undefined,
-  description?: string | undefined,
-}
+import { paramsConf, voidConf } from '../types/type'
 
-interface voidConf {
-  (ctx: Context, params: paramsConf): Promise<[]>
-}
 // 查询列表
 const getBookList: voidConf = async (ctx: Context, params: paramsConf) => {
   let pageSize = params.pageSize || 10

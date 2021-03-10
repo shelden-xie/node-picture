@@ -21,6 +21,6 @@ export const checkParams = (ctx: Context, params = {}) => {
 }
 
 // 获取参数
-export const getParams = (ctx: Context) => {
+export const getParams= (ctx: Context) => {
   return Object.assign(ctx.query, ctx.request.body)
 }

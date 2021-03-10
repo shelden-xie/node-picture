@@ -12,7 +12,6 @@ import koaBody from "koa-body"; //处理post参数
 import parameter from "koa-parameter"; //参数校验
 import cors from "koa2-cors"; //允许客户端跨域访问
 import compress from "koa-compress"; //开启服务端Gzip压缩功能
-import helmet from "koa-helmet"; //设置Http头保障应用程序安全j
 import verifyTokens from "./middlewares/vetifyUser"; //验证路由token中间件
 import { historyApiFallback } from "koa2-connect-history-api-fallback"; //koa2支持SPA应用程序,加白名单
 //错误处理
@@ -24,20 +23,23 @@ const logger = log4js.getLogger("globalError");
 // 初始化模板配置d
 app.context.render = co.wrap(
   render({
+    root: config.viewsDir,
     cache: config.cache,
-    writeBody: false
+    autoescape: true,
+    ext: "html",
+    varControls: ["[[", "]]"],
+    writeBody: false,
   })
 );
 
 // 初始化中间件
 app.use(staticServe(config.staticDir)); //配置访问静态资源
-app.use(historyApiFallback({ index: "/", whiteList: ["/api"] }));
+app.use(historyApiFallback({ index: "/", whiteList: ["/api"] }));7
 app.use(proxy); //代理数据库
 app.use(koaBody()); //处理post请求
 app.use(parameter(app)); //开启全局参数校验
 app.use(cors()); //开启跨域
 app.use(compress({ threshold: 2048 })); //当数据超过2kb的时候进行压缩
-app.use(helmet.contentSecurityPolicy()); //默认使用多种策略，可以具体某一项配置
 log4js.configure(log4json);//初始化log4
 
 //初始化连接数据库

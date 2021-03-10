@@ -1,28 +1,13 @@
 import path from 'path';
-interface configApi{
-    port: number,
-    viewsDir:string,
-    staticDir: string,
-    token: {
-      secret: string,
-      expireIn: string | number
-    },
-    cache: false,
-    dbUrl: string,
-    redis: {
-      url: string,
-      port: number,
-      password: string
-    }
-}
+import { configApi } from '../types/type'
 
-let config= {
+let config = {
   port: 3000,
-  viewsDir: path.join(__dirname, "../", "views"),
+  viewsDir: path.join(__dirname, "../../src", "web"),
   staticDir: path.join(__dirname, '../', 'assets'),
-  token:{
-    secret:'node_picture_shelden',
-    expireIn:'1h'
+  token: {
+    secret: 'node_picture_shelden',
+    expireIn: '1h'
   }
 };
 

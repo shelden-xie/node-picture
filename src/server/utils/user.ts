@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs"; //密码加密库
 import config from "../config";
 import jwt from "jsonwebtoken"; //登录验证
 // 获取token
-export const getToken = (payload = {}) => {
+export const getToken = (payload={}) => {
 
   return jwt.sign(payload, config.token.secret, {
     expiresIn: config.token.expireIn,
@@ -13,7 +13,7 @@ export const getToken = (payload = {}) => {
 export const verifyToken = (token: string) => {
   return new Promise((resolve, reject) => {
     try {
-      jwt.verify(token.replace(/Bearer /, ''), config.token.secret, function (err, decoded) {
+      jwt.verify(token.replace(/Bearer /, ''), config.token.secret, function (err:unknown, decoded:unknown) {
         err ? resolve(false) : resolve(decoded);
       });
     } catch (e) {
