@@ -64,7 +64,7 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
+    <!-- <script>
       new Vue({
         el: "#app",
         computed: {
@@ -104,7 +104,7 @@
           },
         },
       });
-    </script>
+    </script> -->
   </body>
   <!-- <script>
     const findLastIndex = (nums, target) => {
@@ -121,27 +121,40 @@
     console.log(findLastIndex([1, 2, 3, 3, 3, 4], 3));
   </script> -->
   <script>
-    function deepCopy(obj) {
-      const res = Array.isArray(obj) ? [] : {};
-      for (let key in obj) {
-        if (typeof obj[key] === "object") {
-          res[key] = deepCopy(obj[key]);
-        } else {
-          res[key] = obj[key];
-        }
-      }
-      return res;
-    }
-    var obj = {
-      a: 1,
-      b: 2,
-      c: [1, 2, 3],
-      d: { aa: 1, bb: 2 },
-    };
-    obj.e = obj;
-    console.log("obj", obj); // 不会报错
+    // function deepCopy(obj) {
+    //   const res = Array.isArray(obj) ? [] : {};
+    //   for (let key in obj) {
+    //     if (typeof obj[key] === "object") {
+    //       res[key] = deepCopy(obj[key]);
+    //     } else {
+    //       res[key] = obj[key];
+    //     }
+    //   }
+    //   return res;
+    // }
+    // var obj = {
+    //   a: 1,
+    //   b: 2,
+    //   c: [1, 2, 3],
+    //   d: { aa: 1, bb: 2 },
+    // };
+    // obj.e = obj;
+    // console.log("obj", obj); // 不会报错
 
     // const objCopy = deepCopy(obj);
     // console.log(objCopy); //Uncaught RangeError: Maximum call stack size exceeded
+    const curry = (fn) => {
+      return (judge = (...args) => {
+        return console.log(args,fn);
+        args.length === fn.length
+          ? fn(...args)
+          : (...arg) => judge(...args, ...arg);
+      });
+    };
+    const add = (a, b, c) => a + b + c;
+    const curryAdd = curry(add);
+    curryAdd(1)(2)(3); // 6
+    // console.log(curryAdd(1, 2)(3)); // 6
+    // console.log(curryAdd(1)(2, 3)); // 6
   </script>
 </html>

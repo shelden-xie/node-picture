@@ -5,26 +5,25 @@ import path from "path";
  */
 
 
-const fileImport = (d:string) => {
-  d = d || path.join(__dirname);
+const fileImport = (filePath:string) => {
+  filePath = filePath || path.join(__dirname);
   const tree:any= {};
-  // 获得当前文件夹下的所有的文件夹和文件
   let files = [];
   try {
-    files = fs.readdirSync(d);
+    files = fs.readdirSync(filePath);
   } catch (error) {
     throw new Error("read is error");
   }
   files.forEach((file) => {
     if (file !== "index.js" && path.extname(file) === ".js") {
       //获取当前文件的绝对路径
-      const filedir = path.join(d, file);
+      const filedir = path.join(filePath, file);
       try {
         let stats = fs.statSync(filedir);
         const isFile = stats.isFile(); //是文件
         const isDir = stats.isDirectory(); //是文件夹
         if (isFile) {
-          tree[path.basename(file, ".js")] = require(path.join(d, file)).default
+          tree[path.basename(file, ".js")] = require(path.join(filePath, file)).default
         }
         if (isDir) {
           // fileImport(filedir);//递归，如果是文件夹，就继续遍历该文件夹下面的文件

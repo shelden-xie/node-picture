@@ -1,16 +1,16 @@
 import { Context } from 'koa'
-import { voidLoginConf, paramsLoginApi } from '../types/type'
+import { paramsLoginApi } from '../types/type'
 
 
-const saveUser: voidLoginConf = (ctx: Context, params: paramsLoginApi) => {
+const saveUser = (ctx: Context, params: paramsLoginApi): Promise<void> => {
     return ctx.db.user.create(params);
 };
 
-const findUser: voidLoginConf = (ctx: Context, params: paramsLoginApi) => {
+const findUser = (ctx: Context, params: paramsLoginApi): Promise<void> => {
     return ctx.db.user.findOne(params);
 };
 
-const updateUser: voidLoginConf = (ctx: Context, params: paramsLoginApi) => {
+const updateUser = (ctx: Context, params: paramsLoginApi): Promise<void> => {
     return ctx.db.user.updateOne({ name: params.name }, params);
 };
 

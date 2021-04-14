@@ -8,7 +8,9 @@ import { success, fail, getParams } from "../utils/responseHandle";
 import models from "../models";
 import dayjs from "dayjs";
 import { Context } from 'koa'
+import{ Users } from '../types/type'
 
+// 登录controller
 const login = async (ctx: Context) => {
   let params = getParams(ctx);
   let times = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
@@ -28,6 +30,7 @@ const login = async (ctx: Context) => {
   ctx.body = success(0, { token: token }, "登录成功");
 };
 
+// 注册controller
 const register = async (ctx: Context) => {
   let params = getParams(ctx);
   let times = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
@@ -46,9 +49,12 @@ const register = async (ctx: Context) => {
 };
 
 const userInfo = async (ctx: Context) => {
-  let userInfo: any = await verifyToken(ctx.headers.authorization);
-  let data = await models.userModel.findUser(ctx, { name: userInfo.name });
-  ctx.body = success(0, data, "请求成功");
+  const usersInfo = await verifyToken(ctx.headers.authorization);
+    if ((usersInfo as Users).expire) {
+      return (ctx.body = fail(100403, "用户登录已过期，请重新登陆"));
+    }
+    let data = await models.userModel.findUser(ctx, { name: (usersInfo as Users).name });
+    ctx.body = success(0, data, "请求成功");
 };
 export default {
   login,

@@ -33,6 +33,7 @@ app.context.render = co.wrap(
 );
 
 // 初始化中间件
+console.log(app,'>>>>>>')
 app.use(staticServe(config.staticDir)); //配置访问静态资源
 app.use(historyApiFallback({ index: "/", whiteList: ["/api"] }));7
 app.use(proxy); //代理数据库

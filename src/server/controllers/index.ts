@@ -2,7 +2,9 @@ import path from "path";
 import router from "koa-simple-router";
 import fileImport from "../utils/file-import-all";
 const controllers = fileImport(path.join(__dirname)); //获取所有的controller
-function initController(app: any): void {
+import { App } from '../types/type'
+
+function initController(app: App): void {
   app.use(
     router((_: any): void => {
       _.get("/", controllers.IndexController.actionIndex);

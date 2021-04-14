@@ -1,4 +1,15 @@
 import { Context } from 'koa'
+
+// 定义app
+export interface App {
+    use: (callback: (ctx: Context, next: () => void) => Promise<void>) => void
+}
+// 用户信息
+export type Users = {
+    name?: string;
+    expire?:boolean;
+    [propName:string]:any; 
+  };
 // config
 export interface configApi {
     port: number,
@@ -25,17 +36,9 @@ export interface paramsConf {
     name?: string | undefined,
     description?: string | undefined,
 }
-// 函数类型
-export interface voidConf {
-    (ctx: Context, params: paramsConf): Promise<[]>
-}
 
 // 登录参数
 export interface paramsLoginApi {
     name: string,
     password: string
-}
-// 登录函数类型
-export interface voidLoginConf {
-    (ctx: Context, params: paramsLoginApi): Promise<[]>
 }

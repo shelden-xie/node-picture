@@ -3,10 +3,10 @@ const gulp = require("gulp");
 const watch = require("gulp-watch"); //监听文件改动
 const rollup = require("gulp-rollup"); //引入rollup
 const replace = require("@rollup/plugin-replace");
-const entry = "./src/server/**/*.ts";
-const cleanEntry = "./src/server/config/index.ts";
 const ts = require("gulp-typescript");
 const tsProject = ts.createProject("tsconfig.json");
+const entry = "./src/server/**/*.ts";
+const cleanEntry = "./src/server/config/index.ts";
 /**
  * // .pipe(
  *   //   babel({
@@ -50,7 +50,7 @@ function cleanConfig() {
 let build = null;
 
 if (process.env.NODE_ENV === "development") {
-  build = gulp.series(buildDev);
+  build = gulp.series(buildDev,cleanConfig);
 }
 
 if (process.env.NODE_ENV === "production") {
